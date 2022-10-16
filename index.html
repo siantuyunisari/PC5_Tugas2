@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <title>Yunisa | Tugas 2-PC5</title>
+    <link rel="icon" href="images/yunWebLogo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<!--Style button-------------->
+<style>
+
+    #read {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+    padding: 15px 32px;
+    font-size:11pt;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    }
+
+    #read:hover {
+    background-color: #4CAF50;
+    color: white;
+    }
+
+    #hist1{
+        background-color: white; 
+        color: black; 
+        border: 2px solid #008CBA;
+        padding: 15px 32px;
+        font-size:11pt;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+    }
+
+    #hist1:hover {
+    background-color: #008CBA;
+    color: white;
+    }
+
+    #ori {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #f44336;
+    padding: 15px 32px;
+    font-size:11pt;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    }
+
+    #ori:hover {
+    background-color: #f44336;
+    color: white;
+    }
+
+    #default {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #555555;
+    padding: 15px 32px;
+    font-size:11pt;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    }
+
+    #default:hover {
+    background-color: #555555;
+    color: white;
+    }
+
+    #histval{
+    background-color: white; 
+        color: black; 
+        border: 2px solid #555555;
+        padding: 15px 32px;
+        font-size:11pt;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+    }
+
+    #histval:hover{
+    background-color: #555555;
+    color: white;
+    }
+
+    #negatif {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #9601FF;
+    padding: 15px 32px;
+    font-size:11pt;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    }
+
+    #negatif:hover {
+    background-color: #9601FF;
+    color: white;
+    }
+
+    #greyscl{
+        background-color: white; 
+        color: black; 
+        border: 2px solid #22B8FA;
+        padding: 15px 32px;
+        font-size:11pt;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+    }
+
+    #greyscl:hover {
+    background-color: #22B8FA;
+    color: white;
+    }
+
+    </style>
+
+<body>
+    
+    <!--bagian HEADER-------------->
+    <header>
+        <a href="#" class="logo">VIMAGE<span>.</span></a>
+    </header>
+
+    <!--bagian CANVAS-------------->
+        <canvas id='canvas1'></canvas>
+        <canvas id='canvas2'></canvas>
+        <br>
+
+    <!--bagian BUTTON-------------->
+        <button id="read">READ IMAGE</button>
+
+        <button id="ori">ORIGINAL IMAGE</button>
+        <br><br>
+
+        <button id="negatif">NEGATIF</button>
+
+        <button id="greyscl">GREYSCL</button>
+        <br><br>
+    
+        <!--bagian THRESHOLD-------------->
+        Threshold <input type='range' min='0' max='255' id='threshold' value='0'>&nbsp
+                <input type='text' id='threshold_val' size='3' disabled value='0'>&nbsp
+                <button id='thdefault'>Reset</button><br><br>  
+
+        <!--bagian BRIGHTNESS-------------->
+        Brightness <input type='range' min='-255' max='255' data-id='4' id='brightness' value='0'>
+            <input type='text' id='brightness_val' size='3' disabled value='0'>&nbsp
+            <button id='brdefault'>Reset</button><br><br>
+
+        <!--bagian HISTOGRAM-------------->
+            <select id='histval'>
+                <option value='0'>Red</option>
+                <option value='1'>Green</option>
+                <option value='2'>Blue</option>
+            </select>
+            <button id="hist1">HISTOGRAM</button> 
+
+            <br>
+            <br>
+            R<input type='range' min='-255'max='255'data-id='1'id='ch1'><input type='text'id='chv1'size='3'disabled value='0'><br><br>
+            G<input type='range' min='-255'max='255'data-id='2'id='ch2'><input type='text'id='chv2'size='3'disabled value='0'><br><br>
+            B<input type='range' min='-255'max='255'data-id='3'id='ch3'><input type='text'id='chv3'size='3'disabled value='0'><br><br>
+            A<input type='range' min='0'max='255'data-id='4'id='ch4'><input type='text'id='chv4'size='3'disabled value='255'><br><br>
+            <button id="default">DEFAULT IMAGE</button>
+            <br>
+            <br>
+
+    </body>
+
+    <!--bagian FOOTER-------------->
+    <footer class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>© Yunisa | Tugas 2-PC5</p>
+    </footer>
+
+
+    <!--SCRIPT-------------->
+    <script src="pc.js"></script>
+            
+    <script>
+        var canvas = document.getElementById('canvas1')
+        var obj = new pc(canvas)
+        obj.image2canvas("merak.jpg")
+
+        var canvas2 = document.getElementById('canvas2')
+        var obj2 = new pc(canvas2)
+        obj2.blank2canvas(200,200)
+
+        var tes = new Array()
+        document.getElementById('read').addEventListener('click',function(){
+            tes = obj.image2read()
+        })
+
+        document.getElementById('ori').addEventListener('click',function(){
+            obj.image2original()
+        })
+
+        function rgbachange(){
+            tesbackup = new Array()
+            for(var c=0; c<tes.length; c++){
+                temp = new Array()
+                for(var d=0; d<4; d++){
+                    temp.push(tes[c][d])
+                }
+                tesbackup.push(temp)
+            }
+            //end of copy
+            for(var j=0; j<tesbackup.length; j++){
+                tesbackup[j][0] += parseInt(document.getElementById('ch1').value)
+                tesbackup[j][1] += parseInt(document.getElementById('ch2').value)
+                tesbackup[j][2] += parseInt(document.getElementById('ch3').value)
+                tesbackup[j][3] = parseInt(document.getElementById('ch4').value)
+            }  
+            for(var i=1; i<=4; i++) document.getElementById('chv'+i).value = document.getElementById('ch'+i).value 
+            obj.array2canvas(tesbackup)
+        }
+
+        for(var i=1; i<=4; i++){
+            document.getElementById('ch'+i).addEventListener('input',function(){
+                rgbachange()
+            })
+        }
+
+        document.getElementById('default').addEventListener('click',function(){
+            for(var i=1; i<=3; i++){
+                document.getElementById('ch'+i).value=0
+            }
+            document.getElementById('ch4').value=255
+            rgbachange()
+        })
+
+        document.getElementById('hist1').addEventListener('click',function(){
+            var hist = obj.hist2read([parseInt(document.getElementById("histval").value)]) //Call [R, G, B, A] as [0, 1, 2, 3], can input more than 1 but only [0..3] parameter :only-child
+            obj.hist2canvas(hist[0],10)
+        })
+
+        document.getElementById('thdefault').addEventListener('click',function(){
+            document.getElementById('threshold').value = 0
+            document.getElementById('threshold_val').value = 0
+            rgbachange()
+        })
+
+        document.getElementById('brdefault').addEventListener('click',function(){
+            document.getElementById('brightness').value = 0
+            document.getElementById('brightness_val').value = 0
+            rgbachange()
+        })
+
+        document.getElementById('negatif').addEventListener('click', function(){
+            tesbackup = new Array()
+            for(var c=0; c<tes.length; c++){
+                temp = new Array()
+                for(var d=0; d<4; d++){
+                    temp.push(tes[c][d])
+                }
+                tesbackup.push(temp)
+            }
+
+            for(var i=0; i<tesbackup.length; i++){
+                tes[i][0] = (255-tesbackup[i][0])
+                tes[i][1] = (255-tesbackup[i][1])
+                tes[i][2] = (255-tesbackup[i][2])
+                tes[i][3] = tesbackup[i][3]
+            }
+            obj.array2canvas(tes)
+        })
+
+        document.getElementById('grayscl').addEventListener('click',function(){
+            tesbackup = new Array()
+            for(var c=0; c<tes.length; c++){
+                temp = new Array()
+                for(var d=0; d<4; d++){
+                    temp.push(tes[c][d])
+                }
+                tesbackup.push(temp)
+            }
+
+            for(var i=0; i<tesbackup.length; i++){
+                var total = Math.floor((tesbackup[i][0] + tesbackup[i][1] + tesbackup[i][2])/3)
+                tes[i][0] = total
+                tes[i][1] = total
+                tes[i][2] = total
+                tes[i][3] = tesbackup[i][3]
+            }
+            obj.array2canvas(tes)                    
+        })
+
+        document.getElementById('threshold').addEventListener('input',function(){
+            document.getElementById('threshold_val').value=this.value
+            batas = parseInt(this.value)
+
+            tesbackup = new Array()
+            for(var c=0; c<tes.length; c++){
+                temp = new Array()
+                for(var d=0; d<4; d++){
+                    temp.push(tes[c][d])
+                }
+                tesbackup.push(temp)
+            }
+
+            for (var i=0; i<tes.length; i++){
+                gabung = Math.floor((tesbackup[i][0] + tesbackup[i][1] + tesbackup[i][2])/3)
+                if(gabung<batas){
+                    gabung=0
+                }
+                else{
+                    gabung=255
+                }
+
+                tes[i][0] = gabung
+                tes[i][1] = gabung
+                tes[i][2] = gabung
+                tes[i][3] = tes[i][3]
+            }
+            obj.array2canvas(tesbackup)
+        })
+
+        document.getElementById('brightness').addEventListener('input',function(){
+            document.getElementById('brightness_val').value=this.value
+            p = parseInt(this.value)
+
+            tesbackup = new Array()
+            for(var c=0; c<tes.length; c++){
+                temp = new Array()
+                for(var d=0; d<4; d++){
+                    temp.push(tes[c][d])
+                }
+                tesbackup.push(temp)
+            }
+
+            for(var i=0; i<tes.length; i++){
+                tesbackup[i][0] = (tes[i][0]+p)
+                tesbackup[i][1] = (tes[i][1]+p)
+                tesbackup[i][2] = (tes[i][2]+p)
+                tesbackup[i][3] = tes[i][3]
+            }
+            obj.array2canvas(tesbackup)
+        })                
+    </script>
+    
+</html>
